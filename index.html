@@ -1,0 +1,799 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ff9dba">
+<title>Dunia Pintar Anak</title>
+
+<style>
+:root{
+ --pink:#ff9fbd;
+ --orange:#ffbd59;
+ --yellow:#ffe58a;
+ --blue:#8bd5f5;
+ --green:#9be2ad;
+ --purple:#c9b4ff;
+ --dark:#40516b;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:"Trebuchet MS",Arial,sans-serif;
+ color:var(--dark);
+ background:linear-gradient(135deg,#fff0f5,#fff8e8,#eaf8ff);
+ min-height:100vh;
+}
+header{
+ background:linear-gradient(110deg,#ff9fbd,#ffbd59);
+ color:white;
+ text-align:center;
+ padding:23px 12px;
+ border-radius:0 0 30px 30px;
+ box-shadow:0 5px 15px #0001;
+}
+header h1{margin:0;font-size:clamp(25px,5vw,38px)}
+header p{margin:7px 0 0}
+main{max-width:900px;margin:20px auto;padding:12px}
+.card{
+ background:white;
+ padding:20px;
+ border-radius:24px;
+ margin-bottom:17px;
+ box-shadow:0 7px 22px #52647b13;
+}
+.center{text-align:center}
+.hidden{display:none!important}
+h2{margin-top:5px}
+input{
+ width:100%;
+ padding:14px;
+ border:2px solid #e7eaf0;
+ border-radius:14px;
+ font-size:17px;
+ margin:8px 0;
+}
+button{
+ border:0;
+ border-radius:16px;
+ padding:13px 17px;
+ margin:5px;
+ font-size:16px;
+ font-weight:bold;
+ cursor:pointer;
+ background:var(--orange);
+ color:#61451f;
+ box-shadow:0 4px 0 #e1a345;
+ transition:.15s;
+}
+button:active{transform:translateY(3px);box-shadow:none}
+button:disabled{opacity:.45;cursor:not-allowed}
+.pink{background:#ffe1eb;color:#934a65;box-shadow:0 4px 0 #f1c0d0}
+.blue{background:#dff3ff;color:#315c78;box-shadow:0 4px 0 #b9dfef}
+.green{background:#dcf7e3;color:#28623b;box-shadow:0 4px 0 #b5e5c2}
+.purple{background:#eee5ff;color:#614a91;box-shadow:0 4px 0 #d2c1f3}
+.full{width:100%}
+.grid{
+ display:grid;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:12px;
+}
+.big-choice{
+ min-height:125px;
+ font-size:22px;
+ background:#fff1d9;
+ box-shadow:0 5px 0 #f0d5a6;
+}
+.big-choice:nth-child(2){background:#e5f5ff;box-shadow:0 5px 0 #c5e4f4}
+.big-choice:nth-child(3){background:#f4eaff;box-shadow:0 5px 0 #dfcef3}
+.big-choice:nth-child(4){background:#e5f8e9;box-shadow:0 5px 0 #c6e8ce}
+.big-choice small{display:block;font-size:13px;margin-top:7px}
+.topic{
+ background:#f0f7ff;
+ color:#405a74;
+ min-height:75px;
+ width:100%;
+ box-shadow:0 4px 0 #dceafa;
+}
+.topic:nth-child(3n){background:#fff0f5;box-shadow:0 4px 0 #f5d9e3}
+.topic:nth-child(3n+1){background:#fff7df;box-shadow:0 4px 0 #f2e5b8}
+.topline{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ flex-wrap:wrap;
+ gap:8px;
+}
+.stars{color:#e5a000;font-size:19px;font-weight:bold}
+.progress{
+ height:13px;
+ background:#edf0f4;
+ border-radius:20px;
+ overflow:hidden;
+ margin:13px 0;
+}
+.progress div{
+ height:100%;
+ width:0;
+ background:linear-gradient(90deg,#8bd6a4,#ffbd59);
+ transition:width .3s;
+}
+.picture{
+ font-size:clamp(65px,14vw,105px);
+ text-align:center;
+ margin:14px 0;
+}
+.question{
+ font-size:clamp(22px,4vw,29px);
+ font-weight:900;
+ text-align:center;
+ margin:12px 0;
+}
+.options{
+ display:grid;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:12px;
+ margin:18px 0;
+}
+.option{
+ min-height:78px;
+ background:#eff7ff;
+ color:#38536b;
+ border:2px solid #dcecf8;
+ box-shadow:none;
+ font-size:18px;
+}
+.option.correct{background:#d9f7e2;border-color:#6dcb8a}
+.option.wrong{background:#ffe2e2;border-color:#ed9999}
+.feedback{
+ text-align:center;
+ min-height:38px;
+ font-weight:bold;
+ font-size:18px;
+ margin:10px;
+}
+.music-button{
+ background:#fff0f5;
+ color:#9c4f69;
+ box-shadow:0 3px 0 #f3cbd8;
+}
+.welcome-emoji{
+ font-size:65px;
+ animation:float 2s infinite ease-in-out;
+}
+@keyframes float{
+ 0%,100%{transform:translateY(0)}
+ 50%{transform:translateY(-10px)}
+}
+.badge{
+ display:inline-block;
+ background:#fff3d6;
+ border-radius:30px;
+ padding:8px 14px;
+ margin:5px;
+}
+#certificate{
+ border:8px double #e9ad4b;
+ padding:28px 15px;
+ text-align:center;
+ background:#fffdf4;
+}
+#certificate h1{color:#d88a25;font-size:32px}
+#certificate .cert-name{
+ font-size:34px;
+ color:#e47c9b;
+ font-weight:bold;
+ margin:20px 0;
+}
+footer{text-align:center;padding:20px;color:#8793a3}
+@media(max-width:520px){
+ .grid,.options{grid-template-columns:1fr}
+ .card{padding:15px}
+ button{font-size:15px}
+ .big-choice{min-height:105px}
+}
+@media print{
+ body{background:white}
+ body *{visibility:hidden!important}
+ #certificate,#certificate *{visibility:visible!important}
+ #certificate{
+  display:block!important;
+  position:absolute;
+  left:0;top:0;
+  width:100%;
+  min-height:95vh;
+  border:10px double #d99a36;
+  box-shadow:none;
+ }
+ .no-print{display:none!important}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <h1>🌈 DUNIA PINTAR ANAK ⭐</h1>
+ <p>Belajar • Bermain • Berkreasi • Berprestasi</p>
+</header>
+
+<main>
+
+<!-- BERANDA -->
+<section class="card center" id="home">
+ <div class="welcome-emoji">🧸🌟🎈</div>
+ <h2>SELAMAT DATANG, ADIK PINTAR!</h2>
+ <p>Hari ini kita mau bermain dan belajar apa, ya?</p>
+
+ <input id="childName" placeholder="Tulis nama anak di sini">
+
+ <button class="music-button" id="musicBtn" onclick="toggleMusic()">
+ 🎵 Nyalakan Musik
+ </button>
+
+ <p style="margin-top:22px;font-weight:bold">
+ PILIH TEMPAT BELAJARMU!
+ </p>
+
+ <div class="grid">
+  <button class="big-choice" onclick="enterLevel('TK')">
+   🧸<br>TK
+   <small>Games seru dan bergambar</small>
+  </button>
+
+  <button class="big-choice" onclick="showSD()">
+   🎒<br>SD
+   <small>Belajar dan tantangan</small>
+  </button>
+ </div>
+</section>
+
+<!-- PILIH KELAS SD -->
+<section class="card hidden" id="sdPage">
+ <button class="blue" onclick="goHome()">🏠 Beranda</button>
+ <h2 class="center">🎒 PILIH KELAS SD</h2>
+ <div class="grid">
+  <button class="big-choice" onclick="enterLevel('SD 1–3')">
+   📚<br>SD Kelas 1–3
+  </button>
+  <button class="big-choice" onclick="enterLevel('SD 4–6')">
+   🎓<br>SD Kelas 4–6
+  </button>
+ </div>
+</section>
+
+<!-- SAMBUTAN -->
+<section class="card center hidden" id="greeting">
+ <div class="welcome-emoji">🎉🥳🌟</div>
+ <h2 id="greetingTitle">Halo!</h2>
+ <p id="greetingText"></p>
+ <button class="full" onclick="openTopics()">AYO MULAI BELAJAR 🚀</button>
+ <button class="blue" onclick="goHome()">🏠 Beranda</button>
+</section>
+
+<!-- MENU MATERI -->
+<section class="card hidden" id="menu">
+ <div class="topline">
+  <div>
+   <b id="helloName"></b>
+   <div id="levelText"></div>
+  </div>
+  <div class="stars">⭐ <span id="starTotal">0</span></div>
+ </div>
+
+ <button class="blue" onclick="goHome()">🏠 Beranda</button>
+
+ <h2 class="center">📚 PILIH PERMAINAN</h2>
+ <p class="center">Tekan salah satu gambar untuk mulai!</p>
+ <div class="grid" id="topicList"></div>
+</section>
+
+<!-- QUIZ -->
+<section class="card hidden" id="quiz">
+ <div class="topline">
+  <b id="topicName"></b>
+  <span class="badge" id="number"></span>
+ </div>
+
+ <button class="blue" onclick="goHome()">🏠 Beranda</button>
+
+ <div class="progress"><div id="bar"></div></div>
+ <div class="picture" id="picture"></div>
+ <div class="question" id="question"></div>
+ <p class="center" id="instruction">
+ Dengarkan soal, lalu pilih jawaban yang benar!
+ </p>
+
+ <div class="options" id="options"></div>
+ <div class="feedback" id="feedback"></div>
+
+ <div class="center">
+  <button class="purple" onclick="repeatQuestion()">🔊 Ulangi Suara</button>
+  <button class="pink" id="nextBtn" disabled onclick="nextQuestion()">
+   Soal Berikutnya ➜
+  </button>
+ </div>
+</section>
+
+<!-- HASIL -->
+<section class="card center hidden" id="result">
+ <div class="welcome-emoji">🏆🎉🌟</div>
+ <h2>HEBAT SEKALI!</h2>
+ <p id="resultText"></p>
+ <div class="badge">⭐ Bintang: <b id="resultStars"></b></div>
+ <div class="badge">🎯 Jawaban benar: <b id="resultScore"></b>/10</div>
+ <button class="full" onclick="showCertificate()">🎓 LIHAT SERTIFIKAT</button>
+ <button class="green full" onclick="openTopics()">📚 Materi Lain</button>
+ <button class="blue full" onclick="goHome()">🏠 Beranda</button>
+</section>
+
+<!-- SERTIFIKAT -->
+<section class="card hidden" id="certPage">
+ <div id="certificate">
+  <div style="font-size:55px">🏆🌈⭐</div>
+  <h1>SERTIFIKAT PENGHARGAAN</h1>
+  <h2>DUNIA PINTAR ANAK</h2>
+  <p>Diberikan kepada:</p>
+  <div class="cert-name" id="certName"></div>
+  <p>Atas keberhasilannya menyelesaikan pembelajaran</p>
+  <h2 id="certTopic"></h2>
+  <p>Dengan penuh semangat dan keceriaan!</p>
+  <div style="font-size:35px;margin:20px">🌟🎉🌟</div>
+  <p>Teruslah belajar dan menjadi anak hebat!</p>
+  <p id="certDate"></p>
+ </div>
+
+ <div class="center no-print">
+  <button class="full" onclick="window.print()">🖨️ CETAK SERTIFIKAT</button>
+  <button class="blue" onclick="openTopics()">📚 Materi Lain</button>
+  <button class="pink" onclick="goHome()">🏠 Beranda</button>
+ </div>
+</section>
+
+</main>
+
+<footer>🌈 Dunia Pintar Anak — Aku Anak Hebat! ⭐</footer>
+
+<script>
+
+/* ==============================
+   DATA PERMAINAN TK
+================================ */
+
+const gamesTK = {
+
+"🐾 Tebak Hewan":[
+["🐱","Mana gambar kucing?",["🐱 Kucing","🐶 Anjing","🐮 Sapi","🐰 Kelinci"],0],
+["🐶","Mana gambar anjing?",["🐶 Anjing","🐱 Kucing","🐟 Ikan","🐔 Ayam"],0],
+["🐮","Mana gambar sapi?",["🐮 Sapi","🐷 Babi","🐸 Katak","🐤 Ayam"],0],
+["🐰","Mana gambar kelinci?",["🐰 Kelinci","🐘 Gajah","🐱 Kucing","🐟 Ikan"],0],
+["🐘","Mana gambar gajah?",["🐘 Gajah","🐶 Anjing","🐔 Ayam","🐸 Katak"],0],
+["🦆","Mana gambar bebek?",["🦆 Bebek","🐱 Kucing","🐮 Sapi","🐰 Kelinci"],0],
+["🐟","Mana gambar ikan?",["🐟 Ikan","🐘 Gajah","🐶 Anjing","🐔 Ayam"],0],
+["🐸","Mana gambar katak?",["🐸 Katak","🐰 Kelinci","🐱 Kucing","🐮 Sapi"],0],
+["🐔","Mana gambar ayam?",["🐔 Ayam","🐟 Ikan","🐘 Gajah","🐶 Anjing"],0],
+["🦋","Mana gambar kupu-kupu?",["🦋 Kupu-kupu","🐸 Katak","🐱 Kucing","🐟 Ikan"],0]
+],
+
+"🎨 Misi Warna":[
+["🍓","Pilih warna merah!",["🔴 Merah","🔵 Biru","🟢 Hijau","🟡 Kuning"],0],
+["🌿","Pilih warna hijau!",["🟢 Hijau","🔴 Merah","🟡 Kuning","🔵 Biru"],0],
+["🌞","Pilih warna kuning!",["🟡 Kuning","🟣 Ungu","🔵 Biru","⚫ Hitam"],0],
+["🌊","Pilih warna biru!",["🔵 Biru","🟢 Hijau","🔴 Merah","🟠 Oranye"],0],
+["🥛","Pilih warna putih!",["⚪ Putih","⚫ Hitam","🟣 Ungu","🟢 Hijau"],0],
+["🍊","Pilih warna oranye!",["🟠 Oranye","🔵 Biru","⚫ Hitam","🟣 Ungu"],0],
+["🍇","Pilih warna ungu!",["🟣 Ungu","🟡 Kuning","🔴 Merah","⚪ Putih"],0],
+["🌸","Pilih warna merah muda!",["🩷 Merah muda","🟢 Hijau","🔵 Biru","⚫ Hitam"],0],
+["🌳","Pilih warna cokelat!",["🟤 Cokelat","🔴 Merah","🟡 Kuning","🔵 Biru"],0],
+["☁️","Pilih warna abu-abu!",["🩶 Abu-abu","🟠 Oranye","🟢 Hijau","🟣 Ungu"],0]
+],
+
+"🔢 Hitung Gambar":[
+["🍎","Hitung satu apel!",["1","2","3","4"],0],
+["🍓🍓","Hitung stroberi ini!",["2","1","3","4"],0],
+["⭐ ⭐ ⭐","Hitung bintang ini!",["3","2","4","5"],0],
+["🐟🐟🐟🐟","Hitung ikan ini!",["4","3","5","6"],0],
+["🌸🌸🌸🌸🌸","Hitung bunga ini!",["5","4","6","7"],0],
+["⚽⚽⚽⚽⚽⚽","Hitung bola ini!",["6","5","7","8"],0],
+["🦋🦋🦋🦋🦋🦋🦋","Hitung kupu-kupu ini!",["7","6","8","9"],0],
+["🍌🍌🍌🍌🍌🍌🍌🍌","Hitung pisang ini!",["8","7","9","10"],0],
+["🌟🌟🌟🌟🌟🌟🌟🌟🌟","Hitung bintang ini!",["9","8","10","7"],0],
+["🚗🚗🚗🚗🚗🚗🚗🚗🚗🚗","Hitung mobil ini!",["10","9","8","7"],0]
+],
+
+"🔠 Cari Huruf Awal":[
+["🐄","SAPI dimulai huruf apa?",["S","A","B","K"],0],
+["🐱","KUCING dimulai huruf apa?",["K","C","M","S"],0],
+["🐟","IKAN dimulai huruf apa?",["I","A","K","B"],0],
+["🍌","PISANG dimulai huruf apa?",["P","B","S","M"],0],
+["🏠","RUMAH dimulai huruf apa?",["R","L","T","H"],0],
+["🐘","GAJAH dimulai huruf apa?",["G","J","K","D"],0],
+["🍎","APEL dimulai huruf apa?",["A","P","E","I"],0],
+["🌞","MATAHARI dimulai huruf apa?",["M","T","S","B"],0],
+["🦆","BEBEK dimulai huruf apa?",["B","D","P","K"],0],
+["🌸","BUNGA dimulai huruf apa?",["B","M","S","A"],0]
+],
+
+"🔺 Tebak Bentuk":[
+["⚽","Bola berbentuk apa?",["Bola","Kubus","Balok","Kerucut"],0],
+["📦","Kotak ini mirip bentuk apa?",["Kubus","Bola","Tabung","Kerucut"],0],
+["🥫","Kaleng mirip bentuk apa?",["Tabung","Bola","Kubus","Kerucut"],0],
+["🍦","Cone es krim mirip bentuk apa?",["Kerucut","Balok","Bola","Kubus"],0],
+["🧊","Es batu ini mirip bentuk apa?",["Kubus","Bola","Tabung","Kerucut"],0],
+["📚","Buku mirip bentuk apa?",["Balok","Bola","Kerucut","Tabung"],0],
+["🔴","Pilih gambar lingkaran!",["🔴 Lingkaran","🔺 Segitiga","🟦 Persegi","⭐ Bintang"],0],
+["🔺","Pilih gambar segitiga!",["🔺 Segitiga","🔴 Lingkaran","🟦 Persegi","⬜ Persegi panjang"],0],
+["🟦","Pilih gambar persegi!",["🟦 Persegi","🔴 Lingkaran","🔺 Segitiga","⭐ Bintang"],0],
+["▭","Pilih gambar persegi panjang!",["▭ Persegi panjang","🔴 Lingkaran","🔺 Segitiga","⚽ Bola"],0]
+]
+
+};
+
+/* ==============================
+   DATA PELAJARAN SD
+================================ */
+
+const gamesSD = {
+
+"📖 Bahasa Indonesia":[
+["📚","Sinonim kata besar adalah...",["Besar","Luas","Kecil","Pendek"],1],
+["✏️","Lawan kata panas adalah...",["Dingin","Hangat","Terik","Panas"],0],
+["🐄","Penulisan yang benar adalah...",["Sapi","sApi","SAPi","sapii"],0],
+["🏫","Tempat untuk belajar adalah...",["Pasar","Sekolah","Kebun","Terminal"],1],
+["📝","Kalimat yang menggunakan tanda tanya adalah...",["Siapa namamu?","Saya makan.","Hari ini cerah.","Ayo belajar."],0],
+["📖","Kata benda terdapat pada pilihan...",["Berlari","Cantik","Meja","Cepat"],2],
+["🌞","Antonim kata gelap adalah...",["Terang","Malam","Hitam","Redup"],0],
+["🐟","Bentuk jamak dari ikan adalah...",["Ikan-ikan","Ikanan","Mengikan","Ikaner"],0],
+["✍️","Huruf pertama nama orang ditulis...",["Kapital","Kecil","Miring","Tebal"],0],
+["📚","Kalimat yang benar adalah...",["Ibu memasak nasi.","ibu memasak nasi","Ibu Memasak nasi","ibu Memasak Nasi"],0]
+],
+
+"➕ Matematika":[
+["➕","25 + 15 = ...",["30","35","40","45"],2],
+["➖","50 - 18 = ...",["32","38","42","28"],0],
+["✖️","6 × 7 = ...",["36","42","48","56"],1],
+["➗","36 ÷ 6 = ...",["5","6","7","8"],1],
+["🔢","Nilai tempat angka 5 pada 352 adalah...",["Satuan","Puluhan","Ratusan","Ribuan"],1],
+["📐","Bangun datar yang memiliki tiga sisi adalah...",["Persegi","Segitiga","Lingkaran","Persegi panjang"],1],
+["⏰","Satu jam sama dengan ... menit.",["30","45","60","100"],2],
+["💰","Rp5.000 + Rp2.000 = ...",["Rp6.000","Rp7.000","Rp8.000","Rp9.000"],1],
+["🔢","Hasil dari 9 × 8 adalah...",["63","72","81","90"],1],
+["➗","100 ÷ 10 = ...",["5","10","20","25"],1]
+],
+
+"🌏 Pengetahuan Umum":[
+["🌍","Planet tempat kita tinggal adalah...",["Mars","Bumi","Venus","Jupiter"],1],
+["🌞","Matahari terbit dari arah...",["Barat","Utara","Timur","Selatan"],2],
+["🌱","Tumbuhan membutuhkan ... untuk tumbuh.",["Air dan cahaya","Plastik","Asap","Minyak"],0],
+["🫁","Manusia bernapas menggunakan...",["Paru-paru","Lambung","Jantung","Tulang"],0],
+["🐝","Hewan yang menghasilkan madu adalah...",["Semut","Lebah","Kupu-kupu","Lalat"],1],
+["🌧️","Air hujan berasal dari...",["Awan","Tanah","Batu","Api"],0],
+["🦷","Manusia menggunakan gigi untuk...",["Mendengar","Mengunyah","Melihat","Berjalan"],1],
+["🌳","Bagian tumbuhan yang menyerap air adalah...",["Daun","Bunga","Akar","Buah"],2],
+["🚦","Lampu lalu lintas warna merah berarti...",["Jalan","Berhenti","Cepat","Belok"],1],
+["🧭","Arah yang berlawanan dengan utara adalah...",["Timur","Barat","Selatan","Tenggara"],2]
+],
+
+"🇮🇩 Pancasila":[
+["🇮🇩","Dasar negara Indonesia adalah...",["Pancasila","UUD","Bendera","Lagu"],0],
+["⭐","Simbol sila pertama adalah...",["Pohon beringin","Bintang","Rantai","Kepala banteng"],1],
+["⛓️","Simbol sila kedua adalah...",["Rantai","Bintang","Padi kapas","Pohon"],0],
+["🌳","Simbol sila ketiga adalah...",["Bintang","Rantai","Pohon beringin","Kepala banteng"],2],
+["🐂","Simbol sila keempat adalah...",["Padi kapas","Kepala banteng","Bintang","Rantai"],1],
+["🌾","Simbol sila kelima adalah...",["Padi dan kapas","Bintang","Rantai","Pohon"],0],
+["🤝","Contoh sikap persatuan adalah...",["Bertengkar","Gotong royong","Mengejek","Memusuhi"],1],
+["🙏","Menghargai teman yang berbeda agama merupakan sikap...",["Toleransi","Sombong","Malas","Marah"],0],
+["🏫","Musyawarah dilakukan untuk...",["Mencari kesepakatan","Bertengkar","Bermain sendiri","Memaksakan kehendak"],0],
+["❤️","Lambang negara Indonesia adalah...",["Garuda Pancasila","Merpati","Harimau","Elang laut"],0]
+],
+
+"🧠 Logika dan Berpikir":[
+["🔢","Pola angka 2, 4, 6, 8, ...",["9","10","11","12"],1],
+["🔺","Segitiga memiliki ... sisi.",["2","3","4","5"],1],
+["🍎","Jika punya 5 apel lalu diberi 3, jumlahnya...",["6","7","8","9"],2],
+["🐟","Semua ikan hidup di air. Hewan yang hidup di air adalah...",["Ikan","Kucing","Ayam","Kambing"],0],
+["📅","Setelah hari Senin adalah...",["Minggu","Selasa","Rabu","Kamis"],1],
+["🔢","Pola 5, 10, 15, 20, ...",["21","22","25","30"],2],
+["🕒","Jika sekarang pukul 07.00, satu jam kemudian...",["06.00","07.30","08.00","09.00"],2],
+["📏","Benda yang paling panjang adalah...",["Pensil 5 cm","Tali 2 m","Penghapus 3 cm","Koin 2 cm"],1],
+["🧩","Jika semua bunga adalah tumbuhan, mawar termasuk...",["Hewan","Tumbuhan","Batu","Benda mati"],1],
+["➗","Setengah dari 20 adalah...",["5","10","15","20"],1]
+]
+
+};
+
+/* ==============================
+   PENGATURAN APLIKASI
+================================ */
+
+let child="";
+let level="";
+let currentTopic="";
+let questions=[];
+let questionIndex=0;
+let stars=0;
+let score=0;
+let answered=false;
+let lastScore=0;
+let musicOn=false;
+let audioContext=null;
+let musicTimer=null;
+let musicStep=0;
+
+const $=id=>document.getElementById(id);
+
+function hideAll(){
+ ["home","sdPage","greeting","menu","quiz","result","certPage"]
+ .forEach(id=>$(id).classList.add("hidden"));
+}
+
+function goHome(){
+ if("speechSynthesis" in window)speechSynthesis.cancel();
+ hideAll();
+ $("home").classList.remove("hidden");
+}
+
+function showSD(){
+ hideAll();
+ $("sdPage").classList.remove("hidden");
+}
+
+function enterLevel(selected){
+ child=$("childName").value.trim()||"Adik Pintar";
+ level=selected;
+ hideAll();
+ $("greeting").classList.remove("hidden");
+
+ $("greetingTitle").textContent="Halo, "+child+"! 🥳";
+
+ if(level==="TK"){
+  $("greetingText").textContent=
+   "Selamat datang di dunia permainan! Yuk, kita tebak gambar, warna, hewan, dan angka. Kamu pasti bisa!";
+  speak("Halo "+child+". Selamat datang di dunia pintar anak. Ayo kita bermain dan belajar. Kamu anak hebat!");
+ }else{
+  $("greetingText").textContent=
+   "Selamat datang, "+child+"! Siapkan semangatmu untuk menyelesaikan tantangan belajar hari ini!";
+  speak("Halo "+child+". Selamat datang. Ayo belajar dan selesaikan tantangan hari ini!");
+ }
+}
+
+function openTopics(){
+ hideAll();
+ $("menu").classList.remove("hidden");
+ $("helloName").textContent="Halo, "+child+"! 👋";
+ $("levelText").textContent="Kelas: "+level;
+ $("starTotal").textContent=stars;
+
+ let list=$("topicList");
+ list.innerHTML="";
+ let source=level==="TK"?gamesTK:gamesSD;
+
+ Object.keys(source).forEach(topic=>{
+  let btn=document.createElement("button");
+  btn.className="topic";
+  btn.textContent=topic;
+  btn.onclick=()=>startTopic(topic);
+  list.appendChild(btn);
+ });
+}
+
+function startTopic(topic){
+ currentTopic=topic;
+ let source=level==="TK"?gamesTK:gamesSD;
+ questions=source[topic].map(q=>({
+  emoji:q[0],
+  question:q[1],
+  options:q[2].map((v,i)=>({text:v,correct:i===q[3]}))
+ }));
+
+ questionIndex=0;
+ score=0;
+ hideAll();
+ $("quiz").classList.remove("hidden");
+ showQuestion();
+}
+
+function showQuestion(){
+ answered=false;
+ let q=questions[questionIndex];
+
+ // Acak urutan pilihan jawaban
+ q.options.sort(()=>Math.random()-.5);
+
+ $("topicName").textContent=currentTopic;
+ $("number").textContent="Soal "+(questionIndex+1)+"/10";
+ $("bar").style.width=(questionIndex/10*100)+"%";
+ $("picture").textContent=q.emoji;
+ $("question").textContent=q.question;
+ $("feedback").textContent="";
+ $("nextBtn").disabled=true;
+
+ $("instruction").textContent=level==="TK"
+  ?"Ayo pilih gambar atau jawaban yang benar!":
+   "Baca soal dengan teliti, lalu pilih jawaban yang tepat.";
+
+ let box=$("options");
+ box.innerHTML="";
+
+ q.options.forEach((option,i)=>{
+  let btn=document.createElement("button");
+  btn.className="option";
+  btn.textContent=String.fromCharCode(65+i)+". "+option.text;
+  btn.onclick=()=>checkAnswer(i,btn);
+  box.appendChild(btn);
+ });
+
+ repeatQuestion();
+}
+
+function checkAnswer(i,button){
+ if(answered)return;
+
+ let q=questions[questionIndex];
+ let correct=q.options[i].correct;
+
+ if(correct){
+  answered=true;
+  score++;
+  stars++;
+  $("starTotal").textContent=stars;
+  button.classList.add("correct");
+  $("feedback").textContent="🎉 HEBAT! JAWABAN KAMU BENAR! ⭐";
+  $("nextBtn").disabled=false;
+  speak("Hebat sekali! Jawaban kamu benar. Kamu mendapat satu bintang!");
+ }else{
+  button.classList.add("wrong");
+  button.disabled=true;
+  $("feedback").textContent="😊 Belum tepat. Coba pilihan yang lain, ya!";
+  speak("Belum tepat. Ayo coba lagi. Kamu pasti bisa!");
+ }
+}
+
+function nextQuestion(){
+ if(!answered)return;
+
+ questionIndex++;
+
+ if(questionIndex>=questions.length){
+  finishTopic();
+ }else{
+  showQuestion();
+ }
+}
+
+function finishTopic(){
+ lastScore=score;
+ hideAll();
+ $("result").classList.remove("hidden");
+ $("resultText").textContent=
+  "Selamat "+child+"! Kamu berhasil menyelesaikan materi "+currentTopic+".";
+ $("resultStars").textContent=stars;
+ $("resultScore").textContent=score;
+ speak("Selamat "+child+". Kamu sudah menyelesaikan permainan. Hebat sekali!");
+}
+
+function repeatQuestion(){
+ let q=questions[questionIndex];
+ if(!q)return;
+
+ let text=q.question+". ";
+ q.options.forEach((o,i)=>{
+  text+="Pilihan "+String.fromCharCode(65+i)+", "+o.text+". ";
+ });
+ speak(text);
+}
+
+/* ==============================
+   SUARA PEMBACA SOAL
+================================ */
+
+function speak(text){
+ if(!("speechSynthesis" in window))return;
+ speechSynthesis.cancel();
+
+ let u=new SpeechSynthesisUtterance(text);
+ u.lang="id-ID";
+ u.rate=level==="TK"?.78:level==="SD 1–3"?.92:1;
+
+ let voices=speechSynthesis.getVoices();
+ let voice=voices.find(v=>v.lang.toLowerCase().startsWith("id"));
+ if(voice)u.voice=voice;
+
+ speechSynthesis.speak(u);
+}
+
+/* ==============================
+   MUSIK INSTRUMEN SEDERHANA
+================================ */
+
+async function toggleMusic(){
+ try{
+  if(!audioContext){
+   audioContext=new (window.AudioContext||window.webkitAudioContext)();
+  }
+
+  if(audioContext.state==="suspended"){
+   await audioContext.resume();
+  }
+
+  musicOn=!musicOn;
+  $("musicBtn").textContent=musicOn?
+   "🔇 Matikan Musik":"🎵 Nyalakan Musik";
+
+  if(musicOn){
+   playMusic();
+  }else{
+   clearInterval(musicTimer);
+  }
+ }catch(e){
+  alert("Perangkat belum mendukung pemutaran musik.");
+ }
+}
+
+function note(freq,duration){
+ if(!audioContext)return;
+ let osc=audioContext.createOscillator();
+ let gain=audioContext.createGain();
+
+ osc.type="sine";
+ osc.frequency.value=freq;
+ gain.gain.setValueAtTime(.0001,audioContext.currentTime);
+ gain.gain.exponentialRampToValueAtTime(.045,audioContext.currentTime+.03);
+ gain.gain.exponentialRampToValueAtTime(.0001,audioContext.currentTime+duration);
+
+ osc.connect(gain);
+ gain.connect(audioContext.destination);
+ osc.start();
+ osc.stop(audioContext.currentTime+duration);
+}
+
+function playMusic(){
+ clearInterval(musicTimer);
+
+ const melody=[
+  523,659,784,659,
+  587,698,880,698,
+  523,659,784,1046,
+  784,659,587,523
+ ];
+
+ musicStep=0;
+
+ musicTimer=setInterval(()=>{
+  if(!musicOn)return;
+  note(melody[musicStep%melody.length],.28);
+
+  if(musicStep%4===0){
+   note(melody[musicStep%melody.length]/2,.35);
+  }
+
+  musicStep++;
+ },350);
+}
+
+/* ==============================
+   SERTIFIKAT
+================================ */
+
+function showCertificate(){
+ hideAll();
+ $("certPage").classList.remove("hidden");
+ $("certName").textContent=child;
+ $("certTopic").textContent=currentTopic;
+ $("certDate").textContent=
+  "Tanggal: "+new Date().toLocaleDateString("id-ID");
+}
+
+/* ==============================
+   AWAL APLIKASI
+================================ */
+
+window.addEventListener("beforeunload",()=>{
+ if(musicTimer)clearInterval(musicTimer);
+});
+
+</script>
+
+</body>
+</html>
